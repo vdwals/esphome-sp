@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         file:
-          - myko-monitor-esp8266-release.yaml
+          - myko-monitor-ii-esp8266-release.yaml
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4.1.7

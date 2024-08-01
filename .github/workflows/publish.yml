@@ -10,6 +10,6 @@ jobs:
     uses: esphome/workflows/.github/workflows/publish.yml@main
     with:
       # CHANGEME: Set the filenames of your config files here:
-      files: myko-monitor-esp8266-release.yaml
+      files: myko-monitor-ii-esp8266-release.yaml
       # CHANGEME: Set the name of your project here:
       name: MykoMonitor
