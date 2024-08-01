@@ -1,0 +1,38 @@
+esphome:
+  name: myko-monitor-mk-ii
+  friendly_name: MykoMonitor
+  # Automatically add the mac address to the name
+  # so you can use a single firmware for all devices
+  name_add_mac_suffix: true
+
+  # This will allow for project identification,
+  # configuration and updates.
+  project:
+    name: vdwals.myko-monitor
+    version: "2024.8.0"
+
+esp8266:
+  board: esp01_1m
+
+# To be able to get logs from the device via serial and api.
+logger:
+  baud_rate: 0
+
+# API is a requirement of the dashboard import.
+api:
+
+# OTA is required for Over-the-Air updating
+ota:
+  - platform: esphome
+
+# This should point to the public location of this yaml file.
+dashboard_import:
+  package_import_url: github://vdwals/esphome-sp/myko-monitor-esp8266-release.yaml@main
+
+wifi:
+  # Set up a wifi access point using the device name above
+  ap:
+
+# In combination with the `ap` this allows the user
+# to provision wifi credentials to the device.
+captive_portal:
