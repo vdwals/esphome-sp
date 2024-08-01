@@ -1,0 +1,13 @@
+{
+  "chipFamily": "ESP8266",
+  "ota": {
+    "path": "myko-monitor-mk-ii-esp8266/myko-monitor-mk-ii-esp8266.ota.bin",
+    "md5": "f1c9ad380f9f6f4ab2c523fa3f151c55"
+  },
+  "parts": [
+    {
+      "path": "myko-monitor-mk-ii-esp8266/myko-monitor-mk-ii-esp8266.factory.bin",
+      "offset": 0
+    }
+  ]
+}

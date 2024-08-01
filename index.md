@@ -1,6 +1,6 @@
 # About
 
-Add some information about your project here.
+This is the living Project for MykoMonitor - A Schlosspilze Sensor.
 
 # Installation
 
