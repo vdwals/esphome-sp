@@ -37,7 +37,6 @@ ota:
   - platform: http_request
     name: Firmware Update
     source: ${update_url}manifest.json
-    device_class: update
     on_begin:
       then:
         - deep_sleep.prevent: deep_sleep_1
