@@ -1,3 +1,8 @@
+substitutions:
+  update_url: https://vdwals.github.io/esphome-sp/
+  mqtt_host:
+  mqtt_password:
+
 esphome:
   name: myko-monitor-mk-ii
   friendly_name: MykoMonitor
@@ -10,6 +15,12 @@ esphome:
   project:
     name: vdwals.myko-monitor
     version: "2024.8.0"
+  
+  on_boot:
+    priority: -100
+    then:
+      - delay: 4min
+      - deep_sleep.enter: deep_sleep_1
 
 esp8266:
   board: esp01_1m
@@ -25,7 +36,19 @@ api:
 ota:
   - platform: http_request
     name: Firmware Update
-    source: https://vdwals.github.io/esphome-sp/manifest.json
+    source: ${update_url}manifest.json
+    device_class: update
+    on_begin:
+      then:
+        - deep_sleep.prevent: deep_sleep_1
+    on_end:
+      then:
+        - deep_sleep.allow: deep_sleep_1
+    on_error:
+      then:
+        - deep_sleep.allow: deep_sleep_1
+
+http_request:
 
 # This should point to the public location of this yaml file.
 dashboard_import:
@@ -53,9 +76,9 @@ sensor:
   - platform: mhz19
     id: co2_sensor
     co2:
-      name: "MH-Z16 CO2 Value"
+      name: "CO2 Wert"
     temperature:
-      name: "MH-Z16 Temperature"
+      name: "Geräte-Temperatur"
     update_interval: 300s
     automatic_baseline_calibration: false
     warmup_time: 3min
@@ -81,6 +104,23 @@ button:
     on_press:
       - mhz19.calibrate_zero: co2_sensor
 
+binary_sensor:
+  - platform: status
+    name: "Sensor Status"
+
 ## Deep-Sleep
+## GPIO16 connected to RST
+deep_sleep:
+  run_duration: 10s
+  sleep_duration: 5min
+  id: deep_sleep_1
 
 ## MQTT Settings
+mqtt:
+  broker: ${mqtt_host}
+  username: mykomonitor
+  password: ${mqtt_password}
+  discovery: true
+  discovery_prefix: homeassistant
+  topic_prefix: "mykomonitor/${name}"
+
