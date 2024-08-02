@@ -1,7 +1,7 @@
 substitutions:
   update_url: https://vdwals.github.io/esphome-sp/
   mqtt_host: 10.0.0.1
-  mqtt_password: 123456
+  mqtt_password: "123456"
 
 esphome:
   name: myko-monitor-mk-ii
