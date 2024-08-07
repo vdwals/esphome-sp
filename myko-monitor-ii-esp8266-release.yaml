@@ -34,10 +34,8 @@ api:
 
 # OTA is required for Over-the-Air updating
 ota:
-  - platform: http_request
+  - platform: esphome
     name: Firmware Update
-    source: ${update_url}manifest.json
-    device_class: update
     on_begin:
       then:
         - deep_sleep.prevent: deep_sleep_1
@@ -107,13 +105,6 @@ button:
 binary_sensor:
   - platform: status
     name: "Sensor Status"
-
-## Deep-Sleep
-## GPIO16 connected to RST
-deep_sleep:
-  run_duration: 10s
-  sleep_duration: 5min
-  id: deep_sleep_1
 
 ## MQTT Settings
 mqtt:
